@@ -1,0 +1,164 @@
+# Image Table
+[Image]
+fields = [
+    {name="SeriesInstanceUID", hex_tag=[0x0020, 0x000e], type="String", length=200, not_null=true},
+    {name="SOPInstanceUID", hex_tag=[0x0008, 0x0018], type="String", length=200, unique=true},
+    {name="SOPClassUID", hex_tag=[0x0008, 0x0016], type="String", length=200},
+    {name="AcquisitionNumber", hex_tag=[0x0020, 0x0012], type="Integer"},
+    {name="InstanceNumber", hex_tag=[0x0020, 0x0013], type="Integer"},
+    {name="Rows", hex_tag=[0x0028, 0x0011], type="Integer"},
+    {name="Columns", hex_tag=[0x0028, 0x0012], type="Integer"},
+    {name="AcqusitionDate", hex_tag=[0x0008, 0x0022], type="Date"},
+    {name="AcquisitionTime", hex_tag=[0x0008, 0x0032], type="Time"},
+    {name="ContentDate", hex_tag=[0x0008, 0x0023], type="Date"},
+    {name="ContentTime", hex_tag=[0x0008, 0x0033], type="Time"},
+    {name="DICOMFile", hex_tag=[0x0000, 0x0000], type="String", unique=true, not_null=true},
+]
+
+# Patient Table
+[Patient]
+fields = [
+    {name="PatientName", hex_tag=[0x0010, 0x0010], type="String", length=200, unique=true, not_null=true},
+    {name="PatientID", hex_tag=[0x0010, 0x0020], type="String", length=200, unique=true, not_null=true},
+    {name="PatientBirthDate", hex_tag=[0x0010, 0x0030], type="Date"},
+    {name="PatientSex", hex_tag=[0x0010, 0x0040], type="String", length=200},
+    {name="PatientWeight", hex_tag=[0x0010, 0x1030], type="String"},
+]
+
+# Study Table
+[Study]
+fields = [
+    {name="StudyInstanceUID", hex_tag=[0x0020, 0x000d], type="String", length=200, not_null=true, unique=true},
+    {name="StudyID", hex_tag=[0x0020, 0x0010], type="String", length=200},
+    {name="StudyDescription", hex_tag=[0x0008, 0x1030], type="String", length=200},
+    {name="AccessionNumber", hex_tag=[0x0008, 0x0050], type="Integer"},
+    {name="StudyDate", hex_tag=[0x0008, 0x0020], type="Date", not_null=false},
+    {name="StudyTime", hex_tag=[0x0008, 0x0030], type="Time", not_null=false},
+    {name="PatientAge", hex_tag=[0x0010, 0x1010], type="String"},
+    {name="PatientName", hex_tag=[0x0010, 0x0010], type="String", length=200, not_null=false},
+]
+
+# Series Table
+[Series]
+fields = [
+    {name="SeriesInstanceUID", hex_tag=[0x0020, 0x000e], type="String", length=200, unique=true, not_null=true},
+    {name="SeriesDescription", hex_tag=[0x0008, 0x103e], type="String", length=200},
+    {name="SeriesNumber", hex_tag=[0x0020, 0x0011], type="Integer"},
+    {name="Modality", hex_tag=[0x0008, 0x0060], type="String", length=200},
+    {name="ProtocolName", hex_tag=[0x0018, 0x1030], type="String", length=200},
+    {name="Rows", hex_tag=[0x0028, 0x0010], type="Integer"},
+    {name="Columns", hex_tag=[0x0028, 0x0011], type="Integer"},
+    {name="SamplesPerPixel", hex_tag=[0x0028, 0x0002], type="Integer"},
+    {name="PhotometricInterpretation", hex_tag=[0x0028, 0x0004], type="String", length=200},
+    {name="PixelSpacing", hex_tag=[0x0028, 0x0030], type="String", length=200},
+    {name="PixelAspectRatio", hex_tag=[0x0028, 0x0034], type="String", length=200},
+    {name="SliceThickness", hex_tag=[0x0018, 0x0050], type="Decimal"},
+    {name="ContrastBolusAgent", hex_tag=[0x0018, 0x0010], type="String", length=200},
+    {name="FrameOfReferenceUID", hex_tag=[0x0020, 0x0052], type="String", length=200},
+    {name="PlanarConfiguration", hex_tag=[0x0028, 0x0006], type="String", length=200},
+    {name="PatientPosition", hex_tag=[0x0018, 0x5100], type="String", length=200},
+    {name="BodyPartExamined", hex_tag=[0x0018, 0x0015], type="String", length=200},
+    {name="Manufacturer", hex_tag=[0x0008, 0x0070], type="String", length=200},
+    {name="InstitutionName", hex_tag=[0x0008, 0x0080], type="String", length=200},
+    {name="ManufacturerModelName", hex_tag=[0x0008, 0x1090], type="String", length=200},
+    {name="StudyInstanceUID", hex_tag=[0x0020, 0x000d], type="String", length=200, not_null=true},
+    {name="SeriesDate", hex_tag=[0x0008, 0x0021], type="Date"},
+    {name="SeriesTime", hex_tag=[0x0008, 0x0031], type="Time"},
+    {name="MRAcquisitionType", hex_tag=[0x0018, 0x0023], type="String"},
+    {name="AcquisitionDuration", hex_tag=[0x0018, 0x9073], type="String"},
+]
+
+[MRIImagePhilips]
+fields = [
+#    {name="SOPInstanceUID", hex_tag=[0x0008, 0x0018], type="String", length=200, unique=true},
+    {name="PulseSequenceName", hex_tag=[0x0018, 0x9005], type="String", length=200, parent_tag=[0x2005, 0x140f]},
+    {name="PulseSequence", hex_tag=[0x0027, 0x1032], type="Integer"},
+    {name="AcquisitionContrast", hex_tag=[0x0008, 0x9209], type="String", length=200, parent_tag=[0x2005, 0x140f]},
+    {name="UnknownKeyForSinwasDistinction", hex_tag=[0x2005, 0x100d], type="Decimal"},
+    {name="WaterFatShift", hex_tag=[0x2001, 0x1022], type="Decimal"},
+    {name="UnknownKeyForSinwasDistinctionPhilips", hex_tag=[0x2005, 0x100d], type="Decimal"},
+    {name="ImageType", hex_tag=[0x0008, 0x0008], type="String", length=200},
+]
+
+[MRIImageSiemens]
+fields = [
+#    {name="SOPInstanceUID", hex_tag=[0x0008, 0x0018], type="String", length=200, unique=true},
+    {name="Manufacturer", hex_tag=[0x0008, 0x0070], type="String", length=200},
+    {name="SequenceName", hex_tag=[0x0018, 0x0024], type="String", length=200},
+    {name="ImageType", hex_tag=[0x0008, 0x0008], type="String", length=200},
+]
+
+[MRIImageGE]
+fields = [
+#    {name="SOPInstanceUID", hex_tag=[0x0008, 0x0018], type="String", length=200, unique=true},
+    {name="Manufacturer", hex_tag=[0x0008, 0x0070], type="String", length=200},
+    {name="PulseSequence", hex_tag=[0x0027, 0x1032], type="Integer"},
+    {name="ImageType", hex_tag=[0x0008, 0x0008], type="String", length=200},
+]
+
+# MRI Image Table
+[MRIImage]
+fields = [
+    {name="SOPInstanceUID", hex_tag=[0x0008, 0x0018], type="String", length=200, unique=true},
+    {name="SliceLocation", hex_tag=[0x0020, 0x1041], type="String", length=50},
+    {name="ReceiveCoilName", hex_tag=[0x0018, 0x1250], type="String", length=200},
+    {name="NumberOfFrames", hex_tag=[0x0028, 0x0008], type="Integer"},
+    {name="SamplesPerPixel", hex_tag=[0x0028, 0x0002], type="Integer"},
+    {name="PhotometricInterpretation", hex_tag=[0x0028, 0x0004], type="String", length=200},
+    {name="BitsStored", hex_tag=[0x0028, 0x0101], type="Integer"},
+    {name="ImageType", hex_tag=[0x0008, 0x0008], type="String", length=200},
+    {name="AcquisitionMatrix", hex_tag=[0x0018, 0x1310], type="String", length=200},
+    {name="AcquisitionDuration", hex_tag=[0x0018, 0x9073], type="String", length=200},
+    {name="AngioFlag", hex_tag=[0x0018, 0x0025], type="String", length=200},
+    {name="BeatRejectionFlag", hex_tag=[0x0018, 0x1080], type="String", length=200},
+    {name="BitsAllocated", hex_tag=[0x0028, 0x0100], type="Integer"},
+    {name="DBDt", hex_tag=[0x0018, 0x1318], type="String", length=200},
+    {name="EchoNumber", hex_tag=[0x0018, 0x0086], type="Integer"},
+    {name="EchoPlanerPulseSequence", hex_tag=[0x0018, 0x9018], type="String", length=200},
+    {name="EchoTime", hex_tag=[0x0018, 0x0081], type="Decimal"},
+    {name="EchoTrainLength", hex_tag=[0x0018, 0x0091], type="Integer"},
+    {name="FlipAngle", hex_tag=[0x0018, 0x1314], type="String", length=200},
+    {name="HighBit", hex_tag=[0x0028, 0x0102], type="String", length=200},
+    {name="HighRRValue", hex_tag=[0x0018, 0x1082], type="String", length=200},
+    {name="ImagedNucleus", hex_tag=[0x0018, 0x0085], type="String", length=200},
+    {name="ImageOrientation", hex_tag=[0x0020, 0x0037], type="String", length=200},
+    {name="ImagePosition", hex_tag=[0x0020, 0x0032], type="String", length=200},
+    {name="ImagesInAcquisition", hex_tag=[0x0020, 0x1002], type="Integer"},
+    {name="ImagingFrequency", hex_tag=[0x0018, 0x0084], type="String", length=200},
+    {name="InPlanePhaseEncodingDirection", hex_tag=[0x0018, 0x1312], type="String", length=200},
+    {name="IntervalsAcquired", hex_tag=[0x0018, 0x1083], type="String", length=200},
+    {name="IntervalsRejected", hex_tag=[0x0018, 0x1084], type="String", length=200},
+    {name="InversionTime", hex_tag=[0x0018, 0x9079], type="Decimal"},
+    {name="LowRRValue", hex_tag=[0x0018, 0x1081], type="String", length=200},
+    {name="MagneticFieldStrength", hex_tag=[0x0018, 0x0087], type="String", length=200},
+    {name="MultiPlanarExcitation", hex_tag=[0x0018, 0x9012], type="String", length=200},
+    {name="MultipleSpinEcho", hex_tag=[0x0018, 0x9011], type="String", length=200},
+    {name="NominalInterval", hex_tag=[0x0018, 0x1062], type="String", length=200},
+    {name="NumberOfAverages", hex_tag=[0x0018, 0x0083], type="Decimal"},
+    {name="NumberOfPhaseEncodingSteps", hex_tag=[0x0018, 0x0089], type="Integer"},
+    {name="NumberOfTemporalPositions", hex_tag=[0x0020, 0x0105], type="Integer"},
+    {name="PercentPhaseFieldOfView", hex_tag=[0x0018, 0x0094], type="String", length=200},
+    {name="PercentSampling", hex_tag=[0x0018, 0x0093], type="String", length=200},
+    {name="PixelAspectRatio", hex_tag=[0x0028, 0x0034], type="String", length=200},
+    {name="PixelBandwidth", hex_tag=[0x0018, 0x0095], type="String", length=200},
+    {name="PixelSpacing", hex_tag=[0x0028, 0x0030], type="String", length=200},
+    {name="PlanarConfiguration", hex_tag=[0x0028, 0x0006], type="String", length=200},
+    {name="PulseSequenceName", hex_tag=[0x0018, 0x9005], type="String", length=200, parent_tag=[0x2005, 0x140f]},
+    {name="ReconstructionDiameter", hex_tag=[0x0018, 0x1100], type="String", length=200},
+    {name="RepetitionTime", hex_tag=[0x0018, 0x0080], type="Decimal"},
+    {name="SaturationRecovery", hex_tag=[0x0018, 0x9024], type="String", length=200},
+    {name="ScanningSequence", hex_tag=[0x0018, 0x0020], type="String", length=200},
+    {name="ScanOptions", hex_tag=[0x0018, 0x0022], type="String", length=200},
+    {name="SequenceName", hex_tag=[0x0018, 0x0024], type="String", length=200},
+    {name="SequenceVariant", hex_tag=[0x0018, 0x0021], type="String", length=200},
+    {name="SliceThickness", hex_tag=[0x0018, 0x0050], type="Decimal"},
+    {name="SpacingBetweenSlices", hex_tag=[0x0018, 0x0088], type="Decimal"},
+    {name="SteadyStatePulseSequence", hex_tag=[0x0018, 0x9017], type="String", length=200},
+    {name="TemporalPositionIdentifier", hex_tag=[0x0020, 0x0100], type="String", length=200},
+    {name="TemporalResolution", hex_tag=[0x0020, 0x0110], type="Decimal"},
+    {name="TransmitCoilName", hex_tag=[0x0018, 0x1251], type="String", length=200},
+    {name="TriggerTime", hex_tag=[0x0018, 0x1060], type="Decimal"},
+    {name="VariableFlipAngleFlag", hex_tag=[0x0018, 0x1315], type="String", length=200},
+    {name="PulseSequence", hex_tag=[0x0027, 0x1032], type="Integer"},
+    {name="AcquisitionContrast", hex_tag=[0x0008, 0x9209], type="String", length=200, parent_tag=[0x2005, 0x140f]},
+]

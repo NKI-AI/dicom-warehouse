@@ -1,0 +1,27 @@
+# standard columns
+[Standard]
+columns = [
+    {model_name="patient", column_name="patient_name"},
+    {model_name="study", column_name="study_instance_uid"},
+    {model_name="series", column_name="series_instance_uid"},
+    {model_name="series", column_name="series_date"},
+    {model_name="series", column_name="series_time"},
+    {model_name="scan_path", column_name="scan_path"},
+]
+
+[Modality]
+columns = [
+    {model_name="t1w_modality", column_name="time_series"},
+    {model_name="t1w_modality", column_name="subtraction"},
+    {model_name="t2w_modality", column_name="series_description"},
+    {model_name="mdixon_modality", column_name="dixon_type"},
+    {model_name="dwi_modality", column_name="dwi_type"},
+    {model_name="mip_modality", column_name="mip_type"},
+    {model_name="undetermined_modality", column_name="reason"},
+]
+
+# User columns.
+# Be aware that if you have user-specific tables, you will need to add the relationship in manifest_tag_selection.py
+#[User]
+#columns = [
+#]

@@ -12,13 +12,10 @@ data
 
 # development
 development/
+dcmw/development/
 
 # database access stuff
-config/database.ini
-config/dbname_mapping.ini
-
-# mri data
-mridata
+#config/database.ini
 
 # excel sheets
 *.xlsx

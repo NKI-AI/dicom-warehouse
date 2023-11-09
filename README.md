@@ -80,9 +80,3 @@ holds the same tags for every series in the query. For convenience, the most imp
 you wish to change/add some of these tags, have a look at `config/query.toml`. 
 
 ![image](https://user-images.githubusercontent.com/50020718/223116085-10ec23b3-6a16-4393-8da7-a588a001782b.png)
-
-_Some stuff about license? Contact information? Better image?_
-
-# TODO: rsyncanator, resampling
-#  These are some preprocessing files in the dicom pipeline between DICOM-Warehouse and DL training.
-#  Own tables: annotations, more?
