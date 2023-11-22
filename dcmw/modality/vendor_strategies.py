@@ -92,7 +92,7 @@ class ModalityStrategy(ABC):
         """If a critical tag is None, then series description cannot be determined."""
         assert self.critical_tags is not None
         for value in self.critical_tags.values():
-            if not value:
+            if value is None or value == "":
                 return Undetermined("critical_parameter", self.acquisition_times)
         return None
 

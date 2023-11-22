@@ -10,9 +10,9 @@ from dcmw.modality.vendor_strategies import ModalityStrategyFactory
 from dcmw.models.dicom_models import Study, Series
 from dcmw.utils.utils_extraction import extract_tag
 from dcmw.utils.utils_io import get_logger
+from dcmw.models.modality_models import *
 
 logger = get_logger()
-
 
 class ModalityExtractor:
     """
@@ -30,7 +30,7 @@ class ModalityExtractor:
     - extract_modalities: Initiates the modality extraction process for all provided studies.
     """
 
-    def __init__(self, db_manager: DatabaseManager, threads: int = 15, batch_size: int = 45) -> None:
+    def __init__(self, db_manager: DatabaseManager, threads: int = 15, batch_size: int = 45, truncate=True) -> None:
         self.db_manager = db_manager
         self.threads = threads
         self.queue: Queue[Study] = Queue()
@@ -38,6 +38,33 @@ class ModalityExtractor:
         self.batch_size = batch_size if batch_size >= threads else threads
         self.current_batch = 0
         self.t = 0.0
+
+        if truncate:
+            self._truncate_modality_tables()
+
+    def _truncate_modality_tables(self):
+        """Truncate tables"""
+        session = self.db_manager.create_session()
+
+        try:
+            for table in [T1WModality,
+                          T2WModality,
+                          MDixonModality,
+                          UndeterminedModality,
+                          MIPModality,
+                          DWIModality]:
+
+                session.execute(table.__table__.delete())
+
+                # Commit the transaction
+                session.commit()
+        except Exception as e:
+            # Rollback the transaction if an exception occurs
+            session.rollback()
+            raise e
+        finally:
+            # Close the session
+            session.close()
 
     def extract_modalities(self) -> None:
         """

@@ -21,7 +21,6 @@ def main(db_name: str, threads: int = 15, batch_size: int = 45) -> None:
     Returns:
         None
     """
-
     # Initialize database manager
     database_manager = get_database_manager(db_name)
 
